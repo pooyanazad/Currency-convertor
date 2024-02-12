@@ -59,3 +59,43 @@ HTML_TEMPLATE = """
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>Currency Converter</h2>
+        <form method="POST">
+            <input type="number" name="amount" placeholder="Amount" step="0.01" required>
+            <select name="from_currency">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+            </select>
+            <select name="to_currency">
+                <option value="USD">USD - US Dollar</option>
+                <option value="EUR">EUR - Euro</option>
+                <option value="GBP">GBP - British Pound</option>
+                <option value="JPY">JPY - Japanese Yen</option>
+                <option value="AUD">AUD - Australian Dollar</option>
+                <option value="CAD">CAD - Canadian Dollar</option>
+                <option value="CHF">CHF - Swiss Franc</option>
+                <option value="CNY">CNY - Chinese Yuan</option>
+                <option value="SEK">SEK - Swedish Krona</option>
+                <option value="NZD">NZD - New Zealand Dollar</option>
+            </select>
+            <button type="submit">Convert</button>
+        </form>
+        {% if conversion_result %}
+            <div>
+                <h3>Converted Amount:</h3>
+                <p>{{ conversion_result }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+"""
