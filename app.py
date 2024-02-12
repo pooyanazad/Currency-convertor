@@ -99,3 +99,25 @@ HTML_TEMPLATE = """
 </body>
 </html>
 """
+@app.route('/', methods=['GET', 'POST'])
+def currency_converter():
+    conversion_result = None
+    if request.method == 'POST':
+        amount = float(request.form['amount'])
+        from_currency = request.form['from_currency']
+        to_currency = request.form['to_currency']
+        
+        # Making an API request to get the conversion rate
+        response = requests.get(f"{API_URL}{from_currency}")
+        if response.status_code == 200:
+            data = response.json()
+            rate = data['conversion_rates'][to_currency]
+            converted_amount = amount * rate
+            conversion_result = f"{amount} {from_currency} = {converted_amount:.2f} {to_currency}"
+        else:
+            conversion_result = "Error: Unable to fetch conversion rate."
+        
+    return render_template_string(HTML_TEMPLATE, conversion_result=conversion_result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
